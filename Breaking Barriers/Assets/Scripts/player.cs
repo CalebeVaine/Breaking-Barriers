@@ -4,15 +4,11 @@ public class Player : MonoBehaviour
 
 {
 
-
     private float horizontal;
 
-    private float vertical;
+    public float speed = 5f;
 
-    public float speed;
-
-    Rigidbody2D body;
-
+    private Rigidbody2D body;
 
     void Start()
 
@@ -22,22 +18,21 @@ public class Player : MonoBehaviour
 
     }
 
-
     void Update()
 
     {
 
         horizontal = Input.GetAxisRaw("Horizontal");
 
-        vertical = Input.GetAxisRaw("Vertical");
+    }
 
-        body.linearVelocity = new Vector2(horizontal, vertical) * speed;
+    void FixedUpdate()
 
-        {
+    {
 
-        }
-
+        body.linearVelocity = new Vector2(horizontal * speed, body.linearVelocity.y);
 
     }
+
 }
 
