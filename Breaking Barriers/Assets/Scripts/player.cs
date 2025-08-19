@@ -1,59 +1,43 @@
 using UnityEngine;
 
-public class player : MonoBehaviour
+public class Player : MonoBehaviour
 
 {
 
-    public float velocidade = 5f;
 
-    public float forcaPulo = 5f;
+    private float horizontal;
 
-    private Rigidbody2D rig;
+    private float vertical;
+
+    public float speed;
+
+    Rigidbody2D body;
+
 
     void Start()
 
     {
 
-        rig = GetComponent<Rigidbody2D>();
+        body = GetComponent<Rigidbody2D>();
 
     }
+
 
     void Update()
 
     {
 
-        Mover();
+        horizontal = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButtonDown("Jump"))
+        vertical = Input.GetAxisRaw("Vertical");
+
+        body.linearVelocity = new Vector2(horizontal, vertical) * speed;
 
         {
 
-            Pular();
-
         }
 
-    }
-
-    void Mover()
-
-    {
-
-        float horizontal = Input.GetAxis("Horizontal");
-
-        Vector2 movimento = new Vector2(horizontal * velocidade, rig.linearVelocity.y);
-
-        rig.linearVelocity = movimento;
 
     }
-
-    void Pular()
-
-    {
-
-        rig.AddForce(Vector2.up * forcaPulo, ForceMode2D.Impulse);
-
-    }
-
-
-
 }
+
